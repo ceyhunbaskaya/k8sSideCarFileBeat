@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busyboxwithfilebeat2
+  labels:
+    app: busyboxwithFilebeat2
+spec:
+  containers:
+  - image: busybox
+    name: busybox2
+    command: ["/bin/sh"]
+    args: ["-c", "sleep 3; nohup sh /app/config/test.sh 1>/dev/null"]
+    env:
+      - name: MY_POD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - name: volume-shared-logs
+        mountPath: /logs
+      - name: volume-app-configs
+        mountPath: /app/config
+  restartPolicy: Always
+  volumes:
+    - name: volume-app-configs
+      configMap:
+        name: application-configs
+        defaultMode: 420
+    - name: volume-shared-logs
+      emptyDir: {}
