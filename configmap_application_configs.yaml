@@ -21,9 +21,9 @@ data:
     count=1
     while [ $valid ]
     do
-    echo $count
+      echo $count
       echo "$(date +%F'  ||  '%R:%S'  ||--') current count value:$count" >> $(hostname).log
-	  if [ $count -eq 50 ];
+      if [ $count -eq 50 ];
         then
           break
       fi
