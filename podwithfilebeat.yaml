@@ -27,3 +27,5 @@ spec:
   volumes:
     - name: volume-app-configs
       configMap:
+    - name: volume-shared-logs
+      emptyDir: {}
