@@ -27,5 +27,7 @@ spec:
   volumes:
     - name: volume-app-configs
       configMap:
+        name: application-configs
+        defaultMode: 420
     - name: volume-shared-logs
       emptyDir: {}
